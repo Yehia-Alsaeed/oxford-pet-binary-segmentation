@@ -40,6 +40,28 @@ Final test metrics from the saved experiment artifacts:
 
 HRNet-W18 achieved the strongest test mIoU and Dice/F1 score in this experiment while also producing the fastest measured inference time per image.
 
+## Visual Overview
+
+### Architecture Comparison
+
+<img src="docs/assets/model-architecture-comparison.svg" alt="Architecture comparison for FCN-ResNet18, SegNet-VGG16, and HRNet-W18" width="100%">
+
+### Qualitative Predictions
+
+The following examples are real prediction grids exported from the experiment notebook. Each grid shows input images, ground-truth binary masks, predicted masks, and prediction overlays.
+
+**FCN-ResNet18**
+
+<img src="docs/assets/fcn-resnet18-predictions.png" alt="FCN-ResNet18 qualitative segmentation predictions" width="100%">
+
+**SegNet-VGG16**
+
+<img src="docs/assets/segnet-vgg16-predictions.png" alt="SegNet-VGG16 qualitative segmentation predictions" width="100%">
+
+**HRNet-W18**
+
+<img src="docs/assets/hrnet-w18-predictions.png" alt="HRNet-W18 qualitative segmentation predictions" width="100%">
+
 ## Methodology
 
 The notebook follows this workflow:

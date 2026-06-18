@@ -1,0 +1,97 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="620" viewBox="0 0 1280 620" role="img" aria-labelledby="title desc">
+  <title id="title">FCN-ResNet18, SegNet-VGG16, and HRNet-W18 segmentation architecture comparison</title>
+  <desc id="desc">A high-level comparison of three binary semantic segmentation pipelines used for Oxford-IIIT Pet foreground segmentation.</desc>
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L0,6 L9,3 z" fill="#2563eb" />
+    </marker>
+    <style>
+      .bg { fill: #f8fafc; }
+      .title { font: 700 34px Arial, sans-serif; fill: #0f172a; }
+      .subtitle { font: 400 17px Arial, sans-serif; fill: #475569; }
+      .lane-title { font: 700 22px Arial, sans-serif; fill: #0f172a; }
+      .lane-note { font: 400 15px Arial, sans-serif; fill: #475569; }
+      .box { fill: #ffffff; stroke: #cbd5e1; stroke-width: 2; rx: 12; }
+      .box-blue { fill: #eff6ff; stroke: #60a5fa; }
+      .box-green { fill: #ecfdf5; stroke: #34d399; }
+      .box-amber { fill: #fffbeb; stroke: #f59e0b; }
+      .box-purple { fill: #f5f3ff; stroke: #8b5cf6; }
+      .text { font: 600 16px Arial, sans-serif; fill: #0f172a; }
+      .small { font: 400 13px Arial, sans-serif; fill: #475569; }
+      .arrow { stroke: #2563eb; stroke-width: 2.5; fill: none; marker-end: url(#arrow); }
+      .shared { fill: #e0f2fe; stroke: #0284c7; stroke-width: 2; rx: 12; }
+    </style>
+  </defs>
+
+  <rect class="bg" x="0" y="0" width="1280" height="620" />
+
+  <text class="title" x="60" y="58">Oxford Pet Binary Segmentation Architectures</text>
+  <text class="subtitle" x="60" y="88">Three pretrained-backbone PyTorch models compared on foreground/background pet segmentation.</text>
+
+  <rect class="shared" x="60" y="120" width="230" height="74" />
+  <text class="text" x="88" y="150">Input Image</text>
+  <text class="small" x="88" y="172">RGB, resized to 320x320</text>
+
+  <rect class="shared" x="990" y="120" width="230" height="74" />
+  <text class="text" x="1018" y="150">Binary Mask</text>
+  <text class="small" x="1018" y="172">Pet foreground vs background</text>
+
+  <line class="arrow" x1="290" y1="157" x2="360" y2="157" />
+  <line class="arrow" x1="920" y1="157" x2="990" y2="157" />
+
+  <text class="lane-title" x="60" y="250">FCN-ResNet18</text>
+  <text class="lane-note" x="60" y="274">Lightweight fully convolutional baseline with ResNet feature fusion.</text>
+  <rect class="box box-blue" x="360" y="220" width="150" height="62" />
+  <text class="text" x="388" y="246">ResNet18</text>
+  <text class="small" x="384" y="266">encoder</text>
+  <rect class="box box-blue" x="555" y="220" width="160" height="62" />
+  <text class="text" x="580" y="246">Feature</text>
+  <text class="small" x="577" y="266">projection + fusion</text>
+  <rect class="box box-blue" x="760" y="220" width="160" height="62" />
+  <text class="text" x="786" y="246">1x1 Head</text>
+  <text class="small" x="788" y="266">upsampled logits</text>
+  <line class="arrow" x1="510" y1="251" x2="555" y2="251" />
+  <line class="arrow" x1="715" y1="251" x2="760" y2="251" />
+
+  <text class="lane-title" x="60" y="372">SegNet-VGG16</text>
+  <text class="lane-note" x="60" y="396">Encoder-decoder segmentation model using max-unpooling indices.</text>
+  <rect class="box box-green" x="360" y="342" width="150" height="62" />
+  <text class="text" x="390" y="368">VGG16</text>
+  <text class="small" x="381" y="388">encoder blocks</text>
+  <rect class="box box-green" x="555" y="342" width="160" height="62" />
+  <text class="text" x="575" y="368">Unpooling</text>
+  <text class="small" x="575" y="388">decoder blocks</text>
+  <rect class="box box-green" x="760" y="342" width="160" height="62" />
+  <text class="text" x="786" y="368">1x1 Head</text>
+  <text class="small" x="788" y="388">mask logits</text>
+  <line class="arrow" x1="510" y1="373" x2="555" y2="373" />
+  <line class="arrow" x1="715" y1="373" x2="760" y2="373" />
+
+  <text class="lane-title" x="60" y="494">HRNet-W18</text>
+  <text class="lane-note" x="60" y="518">High-resolution multi-scale representation with fused feature maps.</text>
+  <rect class="box box-purple" x="360" y="464" width="150" height="62" />
+  <text class="text" x="383" y="490">HRNet-W18</text>
+  <text class="small" x="383" y="510">multi-scale features</text>
+  <rect class="box box-purple" x="555" y="464" width="160" height="62" />
+  <text class="text" x="579" y="490">Projection</text>
+  <text class="small" x="573" y="510">resize + concatenate</text>
+  <rect class="box box-purple" x="760" y="464" width="160" height="62" />
+  <text class="text" x="793" y="490">Fusion</text>
+  <text class="small" x="787" y="510">classifier head</text>
+  <line class="arrow" x1="510" y1="495" x2="555" y2="495" />
+  <line class="arrow" x1="715" y1="495" x2="760" y2="495" />
+
+  <line class="arrow" x1="290" y1="157" x2="360" y2="251" />
+  <line class="arrow" x1="290" y1="157" x2="360" y2="373" />
+  <line class="arrow" x1="290" y1="157" x2="360" y2="495" />
+  <line class="arrow" x1="920" y1="251" x2="990" y2="157" />
+  <line class="arrow" x1="920" y1="373" x2="990" y2="157" />
+  <line class="arrow" x1="920" y1="495" x2="990" y2="157" />
+
+  <rect class="box box-amber" x="990" y="250" width="230" height="154" />
+  <text class="text" x="1018" y="284">Evaluation</text>
+  <text class="small" x="1018" y="312">mIoU</text>
+  <text class="small" x="1018" y="336">Pet IoU</text>
+  <text class="small" x="1018" y="360">Dice/F1</text>
+  <text class="small" x="1018" y="384">Pixel accuracy</text>
+</svg>
