@@ -1,0 +1,36 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+
+# Virtual environments
+.venv/
+venv/
+env/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Local datasets
+data/oxford_pet/
+data/**/images/
+data/**/annotations/
+
+# Model checkpoints and generated weights
+checkpoints/
+*.pt
+*.pth
+*.ckpt
+
+# Generated experiment artifacts
+results_artifacts/*
+!results_artifacts/model_results.csv
+
+# Logs and caches
+*.log
+.cache/
+
+# OS files
+.DS_Store
+Thumbs.db
