@@ -1,97 +1,206 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="620" viewBox="0 0 1280 620" role="img" aria-labelledby="title desc">
-  <title id="title">FCN-ResNet18, SegNet-VGG16, and HRNet-W18 segmentation architecture comparison</title>
-  <desc id="desc">A high-level comparison of three binary semantic segmentation pipelines used for Oxford-IIIT Pet foreground segmentation.</desc>
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1120" viewBox="0 0 1600 1120" role="img" aria-labelledby="title desc">
+  <title id="title">Oxford-IIIT Pet binary segmentation architecture and results comparison</title>
+  <desc id="desc">A structured comparison of FCN-ResNet18, SegNet-VGG16, and HRNet-W18, showing the shared experiment setup, each model pipeline, and the measured test metrics.</desc>
   <defs>
-    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
-      <path d="M0,0 L0,6 L9,3 z" fill="#2563eb" />
+    <marker id="arrow" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto" markerUnits="strokeWidth">
+      <path d="M1,1 L11,6 L1,11 Z" fill="#52645b" />
     </marker>
     <style>
-      .bg { fill: #f8fafc; }
-      .title { font: 700 34px Arial, sans-serif; fill: #0f172a; }
-      .subtitle { font: 400 17px Arial, sans-serif; fill: #475569; }
-      .lane-title { font: 700 22px Arial, sans-serif; fill: #0f172a; }
-      .lane-note { font: 400 15px Arial, sans-serif; fill: #475569; }
-      .box { fill: #ffffff; stroke: #cbd5e1; stroke-width: 2; rx: 12; }
-      .box-blue { fill: #eff6ff; stroke: #60a5fa; }
-      .box-green { fill: #ecfdf5; stroke: #34d399; }
-      .box-amber { fill: #fffbeb; stroke: #f59e0b; }
-      .box-purple { fill: #f5f3ff; stroke: #8b5cf6; }
-      .text { font: 600 16px Arial, sans-serif; fill: #0f172a; }
-      .small { font: 400 13px Arial, sans-serif; fill: #475569; }
-      .arrow { stroke: #2563eb; stroke-width: 2.5; fill: none; marker-end: url(#arrow); }
-      .shared { fill: #e0f2fe; stroke: #0284c7; stroke-width: 2; rx: 12; }
+      .bg { fill: #f5f7f5; }
+      .header { fill: #25302b; }
+      .panel { fill: #ffffff; stroke: #cfd6d1; stroke-width: 2; }
+      .panel-soft { fill: #fbfcfb; stroke: #cfd6d1; stroke-width: 2; }
+      .card { fill: #ffffff; stroke: #c5ccc6; stroke-width: 2; }
+      .step { fill: #f7faf7; stroke: #9cab9f; stroke-width: 2; }
+      .model { fill: #eef4ef; stroke: #698170; stroke-width: 2; }
+      .metric { fill: #f7faf7; stroke: #c5ccc6; stroke-width: 1.5; }
+      .metric-best { fill: #e7f1e8; stroke: #698170; stroke-width: 2; }
+      .badge { fill: #25302b; }
+      .badge-soft { fill: #e7f1e8; stroke: #698170; stroke-width: 1.5; }
+      .arrow { stroke: #52645b; stroke-width: 2.4; fill: none; marker-end: url(#arrow); }
+      .divider { stroke: #dce2de; stroke-width: 2; }
+      .title { font: 700 38px Arial, Helvetica, sans-serif; fill: #ffffff; }
+      .subtitle { font: 400 18px Arial, Helvetica, sans-serif; fill: #dce7df; }
+      .section { font: 700 22px Arial, Helvetica, sans-serif; fill: #25302b; }
+      .model-name { font: 700 24px Arial, Helvetica, sans-serif; fill: #25302b; }
+      .model-role { font: 400 15px Arial, Helvetica, sans-serif; fill: #52645b; }
+      .label { font: 700 16px Arial, Helvetica, sans-serif; fill: #25302b; }
+      .body { font: 400 14px Arial, Helvetica, sans-serif; fill: #52645b; }
+      .small { font: 400 13px Arial, Helvetica, sans-serif; fill: #52645b; }
+      .tiny { font: 400 12px Arial, Helvetica, sans-serif; fill: #66756d; }
+      .metric-label { font: 700 12px Arial, Helvetica, sans-serif; fill: #52645b; letter-spacing: .5px; }
+      .metric-value { font: 700 18px Arial, Helvetica, sans-serif; fill: #25302b; }
+      .badge-text { font: 700 12px Arial, Helvetica, sans-serif; fill: #ffffff; letter-spacing: .4px; }
+      .badge-soft-text { font: 700 12px Arial, Helvetica, sans-serif; fill: #476153; letter-spacing: .4px; }
+      .note { font: 400 15px Arial, Helvetica, sans-serif; fill: #38453f; }
     </style>
   </defs>
 
-  <rect class="bg" x="0" y="0" width="1280" height="620" />
+  <rect class="bg" width="1600" height="1120" />
+  <rect class="header" x="0" y="0" width="1600" height="122" />
+  <text class="title" x="60" y="55">Oxford-IIIT Pet Binary Segmentation</text>
+  <text class="subtitle" x="60" y="88">Shared preprocessing, three pretrained-backbone architectures, and final test-set trade-offs.</text>
+  <rect class="panel" x="60" y="150" width="1480" height="178" rx="18" />
+  <text class="section" x="92" y="188">Shared Experiment Setup</text>
 
-  <text class="title" x="60" y="58">Oxford Pet Binary Segmentation Architectures</text>
-  <text class="subtitle" x="60" y="88">Three pretrained-backbone PyTorch models compared on foreground/background pet segmentation.</text>
+  <rect class="step" x="92" y="214" width="246" height="82" rx="12" />
+  <text class="label" x="116" y="244">Input image</text>
+  <text class="body" x="116" y="268">RGB pet photo</text>
+  <text class="small" x="116" y="288">resized to 320 x 320</text>
 
-  <rect class="shared" x="60" y="120" width="230" height="74" />
-  <text class="text" x="88" y="150">Input Image</text>
-  <text class="small" x="88" y="172">RGB, resized to 320x320</text>
+  <line class="arrow" x1="338" y1="255" x2="384" y2="255" />
+  <rect class="step" x="386" y="214" width="246" height="82" rx="12" />
+  <text class="label" x="410" y="244">Binary target</text>
+  <text class="body" x="410" y="268">trimap 1 + 3 = pet</text>
+  <text class="small" x="410" y="288">trimap 2 = background</text>
 
-  <rect class="shared" x="990" y="120" width="230" height="74" />
-  <text class="text" x="1018" y="150">Binary Mask</text>
-  <text class="small" x="1018" y="172">Pet foreground vs background</text>
+  <line class="arrow" x1="632" y1="255" x2="678" y2="255" />
+  <rect class="step" x="680" y="214" width="246" height="82" rx="12" />
+  <text class="label" x="704" y="244">Training objective</text>
+  <text class="body" x="704" y="268">BCEWithLogits + Dice</text>
+  <text class="small" x="704" y="288">AdamW, pretrained backbones</text>
 
-  <line class="arrow" x1="290" y1="157" x2="360" y2="157" />
-  <line class="arrow" x1="920" y1="157" x2="990" y2="157" />
+  <line class="arrow" x1="926" y1="255" x2="972" y2="255" />
+  <rect class="step" x="974" y="214" width="246" height="82" rx="12" />
+  <text class="label" x="998" y="244">Prediction</text>
+  <text class="body" x="998" y="268">sigmoid logits</text>
+  <text class="small" x="998" y="288">threshold = 0.5</text>
 
-  <text class="lane-title" x="60" y="250">FCN-ResNet18</text>
-  <text class="lane-note" x="60" y="274">Lightweight fully convolutional baseline with ResNet feature fusion.</text>
-  <rect class="box box-blue" x="360" y="220" width="150" height="62" />
-  <text class="text" x="388" y="246">ResNet18</text>
-  <text class="small" x="384" y="266">encoder</text>
-  <rect class="box box-blue" x="555" y="220" width="160" height="62" />
-  <text class="text" x="580" y="246">Feature</text>
-  <text class="small" x="577" y="266">projection + fusion</text>
-  <rect class="box box-blue" x="760" y="220" width="160" height="62" />
-  <text class="text" x="786" y="246">1x1 Head</text>
-  <text class="small" x="788" y="266">upsampled logits</text>
-  <line class="arrow" x1="510" y1="251" x2="555" y2="251" />
-  <line class="arrow" x1="715" y1="251" x2="760" y2="251" />
+  <line class="arrow" x1="1220" y1="255" x2="1266" y2="255" />
+  <rect class="step" x="1268" y="214" width="240" height="82" rx="12" />
+  <text class="label" x="1292" y="244">Evaluation</text>
+  <text class="body" x="1292" y="268">mIoU, Dice/F1, Pet IoU</text>
+  <text class="small" x="1292" y="288">params, speed, epoch time</text>
 
-  <text class="lane-title" x="60" y="372">SegNet-VGG16</text>
-  <text class="lane-note" x="60" y="396">Encoder-decoder segmentation model using max-unpooling indices.</text>
-  <rect class="box box-green" x="360" y="342" width="150" height="62" />
-  <text class="text" x="390" y="368">VGG16</text>
-  <text class="small" x="381" y="388">encoder blocks</text>
-  <rect class="box box-green" x="555" y="342" width="160" height="62" />
-  <text class="text" x="575" y="368">Unpooling</text>
-  <text class="small" x="575" y="388">decoder blocks</text>
-  <rect class="box box-green" x="760" y="342" width="160" height="62" />
-  <text class="text" x="786" y="368">1x1 Head</text>
-  <text class="small" x="788" y="388">mask logits</text>
-  <line class="arrow" x1="510" y1="373" x2="555" y2="373" />
-  <line class="arrow" x1="715" y1="373" x2="760" y2="373" />
+  <text class="section" x="60" y="374">Model Architectures and Outcomes</text>
+  <text class="tiny" x="1114" y="374">Metric order: mIoU, Dice/F1, params, inference, epoch time</text>
 
-  <text class="lane-title" x="60" y="494">HRNet-W18</text>
-  <text class="lane-note" x="60" y="518">High-resolution multi-scale representation with fused feature maps.</text>
-  <rect class="box box-purple" x="360" y="464" width="150" height="62" />
-  <text class="text" x="383" y="490">HRNet-W18</text>
-  <text class="small" x="383" y="510">multi-scale features</text>
-  <rect class="box box-purple" x="555" y="464" width="160" height="62" />
-  <text class="text" x="579" y="490">Projection</text>
-  <text class="small" x="573" y="510">resize + concatenate</text>
-  <rect class="box box-purple" x="760" y="464" width="160" height="62" />
-  <text class="text" x="793" y="490">Fusion</text>
-  <text class="small" x="787" y="510">classifier head</text>
-  <line class="arrow" x1="510" y1="495" x2="555" y2="495" />
-  <line class="arrow" x1="715" y1="495" x2="760" y2="495" />
+  <rect class="panel-soft" x="60" y="398" width="1480" height="190" rx="18" />
+  <rect class="model" x="88" y="430" width="230" height="126" rx="14" />
+  <text class="model-name" x="112" y="466">FCN-ResNet18</text>
+  <text class="model-role" x="112" y="494">Compact fully convolutional</text>
+  <text class="model-role" x="112" y="516">baseline with skip-style</text>
+  <text class="model-role" x="112" y="538">feature fusion.</text>
+  <rect class="badge" x="112" y="560" width="108" height="28" rx="14" />
+  <text class="badge-text" x="132" y="579">BASELINE</text>
 
-  <line class="arrow" x1="290" y1="157" x2="360" y2="251" />
-  <line class="arrow" x1="290" y1="157" x2="360" y2="373" />
-  <line class="arrow" x1="290" y1="157" x2="360" y2="495" />
-  <line class="arrow" x1="920" y1="251" x2="990" y2="157" />
-  <line class="arrow" x1="920" y1="373" x2="990" y2="157" />
-  <line class="arrow" x1="920" y1="495" x2="990" y2="157" />
+  <rect class="card" x="350" y="430" width="138" height="84" rx="12" />
+  <text class="label" x="376" y="462">ResNet18</text>
+  <text class="body" x="377" y="485">stem + layers</text>
+  <line class="arrow" x1="488" y1="472" x2="526" y2="472" />
+  <rect class="card" x="528" y="430" width="140" height="84" rx="12" />
+  <text class="label" x="555" y="462">C2 / C3 / C4</text>
+  <text class="body" x="556" y="485">feature maps</text>
+  <line class="arrow" x1="668" y1="472" x2="706" y2="472" />
+  <rect class="card" x="708" y="430" width="148" height="84" rx="12" />
+  <text class="label" x="739" y="462">1x1 project</text>
+  <text class="body" x="746" y="485">128 channels</text>
+  <line class="arrow" x1="856" y1="472" x2="894" y2="472" />
+  <rect class="card" x="896" y="430" width="158" height="84" rx="12" />
+  <text class="label" x="928" y="462">upsample + add</text>
+  <text class="body" x="946" y="485">fused logits</text>
 
-  <rect class="box box-amber" x="990" y="250" width="230" height="154" />
-  <text class="text" x="1018" y="284">Evaluation</text>
-  <text class="small" x="1018" y="312">mIoU</text>
-  <text class="small" x="1018" y="336">Pet IoU</text>
-  <text class="small" x="1018" y="360">Dice/F1</text>
-  <text class="small" x="1018" y="384">Pixel accuracy</text>
+  <line class="divider" x1="1090" y1="418" x2="1090" y2="568" />
+  <rect class="metric" x="1120" y="420" width="124" height="58" rx="10" />
+  <text class="metric-label" x="1142" y="441">TEST MIOU</text>
+  <text class="metric-value" x="1153" y="465">0.9243</text>
+  <rect class="metric" x="1258" y="420" width="124" height="58" rx="10" />
+  <text class="metric-label" x="1283" y="441">DICE/F1</text>
+  <text class="metric-value" x="1291" y="465">0.9542</text>
+  <rect class="metric" x="1396" y="420" width="114" height="58" rx="10" />
+  <text class="metric-label" x="1424" y="441">PARAMS</text>
+  <text class="metric-value" x="1420" y="465">11.55M</text>
+  <rect class="metric" x="1120" y="494" width="178" height="58" rx="10" />
+  <text class="metric-label" x="1162" y="515">INFERENCE</text>
+  <text class="metric-value" x="1163" y="539">0.192s / image</text>
+  <rect class="metric" x="1312" y="494" width="198" height="58" rx="10" />
+  <text class="metric-label" x="1364" y="515">EPOCH TIME</text>
+  <text class="metric-value" x="1356" y="539">1512.3s / epoch</text>
+
+  <rect class="panel-soft" x="60" y="622" width="1480" height="190" rx="18" />
+  <rect class="model" x="88" y="654" width="230" height="126" rx="14" />
+  <text class="model-name" x="112" y="690">SegNet-VGG16</text>
+  <text class="model-role" x="112" y="718">Symmetric encoder-decoder</text>
+  <text class="model-role" x="112" y="740">using pooling indices for</text>
+  <text class="model-role" x="112" y="762">max-unpool reconstruction.</text>
+  <rect class="badge-soft" x="112" y="784" width="148" height="28" rx="14" />
+  <text class="badge-soft-text" x="130" y="803">LARGEST MODEL</text>
+
+  <rect class="card" x="350" y="654" width="138" height="84" rx="12" />
+  <text class="label" x="382" y="686">VGG16</text>
+  <text class="body" x="370" y="709">encoder blocks</text>
+  <line class="arrow" x1="488" y1="696" x2="526" y2="696" />
+  <rect class="card" x="528" y="654" width="140" height="84" rx="12" />
+  <text class="label" x="562" y="686">pool indices</text>
+  <text class="body" x="565" y="709">saved sizes</text>
+  <line class="arrow" x1="668" y1="696" x2="706" y2="696" />
+  <rect class="card" x="708" y="654" width="148" height="84" rx="12" />
+  <text class="label" x="748" y="686">max-unpool</text>
+  <text class="body" x="744" y="709">decoder path</text>
+  <line class="arrow" x1="856" y1="696" x2="894" y2="696" />
+  <rect class="card" x="896" y="654" width="158" height="84" rx="12" />
+  <text class="label" x="937" y="686">conv blocks</text>
+  <text class="body" x="929" y="709">1x1 mask head</text>
+
+  <line class="divider" x1="1090" y1="642" x2="1090" y2="792" />
+  <rect class="metric" x="1120" y="644" width="124" height="58" rx="10" />
+  <text class="metric-label" x="1142" y="665">TEST MIOU</text>
+  <text class="metric-value" x="1153" y="689">0.9122</text>
+  <rect class="metric" x="1258" y="644" width="124" height="58" rx="10" />
+  <text class="metric-label" x="1283" y="665">DICE/F1</text>
+  <text class="metric-value" x="1291" y="689">0.9462</text>
+  <rect class="metric" x="1396" y="644" width="114" height="58" rx="10" />
+  <text class="metric-label" x="1424" y="665">PARAMS</text>
+  <text class="metric-value" x="1420" y="689">29.46M</text>
+  <rect class="metric" x="1120" y="718" width="178" height="58" rx="10" />
+  <text class="metric-label" x="1162" y="739">INFERENCE</text>
+  <text class="metric-value" x="1160" y="763">2.333s / image</text>
+  <rect class="metric" x="1312" y="718" width="198" height="58" rx="10" />
+  <text class="metric-label" x="1364" y="739">EPOCH TIME</text>
+  <text class="metric-value" x="1361" y="763">405.9s / epoch</text>
+
+  <rect class="panel-soft" x="60" y="846" width="1480" height="190" rx="18" />
+  <rect class="model" x="88" y="878" width="230" height="126" rx="14" />
+  <text class="model-name" x="112" y="914">HRNet-W18</text>
+  <text class="model-role" x="112" y="942">High-resolution backbone</text>
+  <text class="model-role" x="112" y="964">with multi-scale feature</text>
+  <text class="model-role" x="112" y="986">fusion before prediction.</text>
+  <rect class="badge" x="112" y="1008" width="134" height="28" rx="14" />
+  <text class="badge-text" x="131" y="1027">BEST OVERALL</text>
+
+  <rect class="card" x="350" y="878" width="138" height="84" rx="12" />
+  <text class="label" x="373" y="910">HRNet-W18</text>
+  <text class="body" x="376" y="933">timm backbone</text>
+  <line class="arrow" x1="488" y1="920" x2="526" y2="920" />
+  <rect class="card" x="528" y="878" width="140" height="84" rx="12" />
+  <text class="label" x="558" y="910">multi-res</text>
+  <text class="body" x="558" y="933">feature maps</text>
+  <line class="arrow" x1="668" y1="920" x2="706" y2="920" />
+  <rect class="card" x="708" y="878" width="148" height="84" rx="12" />
+  <text class="label" x="739" y="910">1x1 project</text>
+  <text class="body" x="747" y="933">64 channels</text>
+  <line class="arrow" x1="856" y1="920" x2="894" y2="920" />
+  <rect class="card" x="896" y="878" width="158" height="84" rx="12" />
+  <text class="label" x="929" y="910">resize + concat</text>
+  <text class="body" x="922" y="933">fusion + classifier</text>
+
+  <line class="divider" x1="1090" y1="866" x2="1090" y2="1016" />
+  <rect class="metric-best" x="1120" y="868" width="124" height="58" rx="10" />
+  <text class="metric-label" x="1142" y="889">TEST MIOU</text>
+  <text class="metric-value" x="1153" y="913">0.9306</text>
+  <rect class="metric-best" x="1258" y="868" width="124" height="58" rx="10" />
+  <text class="metric-label" x="1283" y="889">DICE/F1</text>
+  <text class="metric-value" x="1291" y="913">0.9582</text>
+  <rect class="metric-best" x="1396" y="868" width="114" height="58" rx="10" />
+  <text class="metric-label" x="1424" y="889">PARAMS</text>
+  <text class="metric-value" x="1420" y="913">11.44M</text>
+  <rect class="metric-best" x="1120" y="942" width="178" height="58" rx="10" />
+  <text class="metric-label" x="1162" y="963">INFERENCE</text>
+  <text class="metric-value" x="1162" y="987">0.063s / image</text>
+  <rect class="metric-best" x="1312" y="942" width="198" height="58" rx="10" />
+  <text class="metric-label" x="1364" y="963">EPOCH TIME</text>
+  <text class="metric-value" x="1361" y="987">369.5s / epoch</text>
+
+  <rect class="panel" x="60" y="1060" width="1480" height="36" rx="18" />
+  <text class="note" x="88" y="1084">Takeaway: HRNet-W18 has the strongest mIoU and Dice/F1 while also being the fastest at inference; SegNet-VGG16 is the heaviest and slowest per image; FCN-ResNet18 is the compact baseline.</text>
 </svg>

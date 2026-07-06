@@ -129,13 +129,6 @@ jupyter notebook pet_segmentation_models.ipynb
 
 For GPU training, install a PyTorch build that matches your CUDA version from the official PyTorch installation selector.
 
-## Notes
-
-- The notebook was developed for local/GPU execution.
-- Training from scratch can take a long time depending on hardware.
-- Checkpoints are generated under `checkpoints/` and are ignored by Git.
-- Results may vary slightly across hardware, random seeds, and dependency versions.
-
 ## Skills Demonstrated
 
 - PyTorch model implementation and training loops
