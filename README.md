@@ -1,8 +1,8 @@
 # Oxford Pet Binary Segmentation
 
-This repository contains a PyTorch deep learning notebook for binary semantic segmentation on the Oxford-IIIT Pet dataset. The task is to classify each pixel as either pet foreground or background using the dataset images and trimap annotations.
+This repository contains a fully functional PyTorch deep learning pipeline for binary semantic segmentation on the Oxford-IIIT Pet dataset. The task is to classify each pixel as either pet foreground or background using the dataset images and trimap annotations.
 
-The notebook implements, trains, evaluates, and compares three segmentation models:
+The pipeline implements, trains, evaluates, and compares three segmentation models:
 
 - **FCN-ResNet18**
 - **SegNet-VGG16**
@@ -10,15 +10,24 @@ The notebook implements, trains, evaluates, and compares three segmentation mode
 
 The final comparison is based on test-set segmentation metrics, model size, inference speed, and training efficiency.
 
-## Project Highlights
+## Tech Stack & Core Skills
 
-- Builds a complete binary segmentation pipeline for Oxford-IIIT Pet images.
-- Converts trimap annotations into foreground/background masks.
-- Uses a fixed train/validation/test split for consistent evaluation.
-- Applies image resizing, normalization, and training-time augmentation.
-- Trains pretrained-backbone segmentation models in PyTorch.
-- Evaluates models with mIoU, pet IoU, Dice/F1, pixel accuracy, precision, and recall.
-- Compares accuracy, parameter count, inference time, and epoch training time.
+This project demonstrates the following technical capabilities:
+- PyTorch model implementation and custom training loops
+- Semantic segmentation preprocessing, data augmentation, and evaluation
+- Transfer learning with pretrained computer-vision backbones
+- Custom PyTorch dataset and dataloader design
+- Metric-driven model comparison (mIoU, Dice/F1)
+- Experiment tracking and artifact management
+
+## Project Highlights & Methodology
+
+The pipeline follows an end-to-end workflow designed for consistent and rigorous evaluation:
+1. **Data Preparation:** Resolves the dataset location and loads fixed train/validation/test splits to ensure consistent evaluation. Converts trimap annotations into binary foreground/background masks.
+2. **Preprocessing:** Applies image resizing, normalization, and training-time augmentations.
+3. **Training:** Trains the FCN-ResNet18, SegNet-VGG16, and HRNet-W18 models using PyTorch, saving the best checkpoints locally.
+4. **Evaluation:** Evaluates models on the fixed test split using mIoU, pet IoU, Dice/F1, pixel accuracy, precision, and recall.
+5. **Comparison:** Analyzes accuracy alongside parameter count, inference time per image, and epoch training time. Qualitative prediction grids and comparison plots are generated for visual inspection.
 
 ## Models
 
@@ -38,7 +47,7 @@ Final test metrics from the saved experiment artifacts:
 | SegNet-VGG16 | 0.9122 | 0.8980 | 0.9462 | 0.9553 | 29.46M | 2.3331s |
 | HRNet-W18 | 0.9306 | 0.9198 | 0.9582 | 0.9650 | 11.44M | 0.0633s |
 
-HRNet-W18 achieved the strongest test mIoU and Dice/F1 score in this experiment while also producing the fastest measured inference time per image.
+**Key takeaway: HRNet-W18 achieved the strongest test mIoU and Dice/F1 score in this experiment while also producing the fastest measured inference time per image.**
 
 ## Visual Overview
 
@@ -48,7 +57,7 @@ HRNet-W18 achieved the strongest test mIoU and Dice/F1 score in this experiment 
 
 ### Qualitative Predictions
 
-The following examples are real prediction grids exported from the experiment notebook. Each grid shows input images, ground-truth binary masks, predicted masks, and prediction overlays.
+The following examples are real prediction grids exported from the experiment. Each grid shows input images, ground-truth binary masks, predicted masks, and prediction overlays.
 
 **FCN-ResNet18**
 
@@ -62,20 +71,6 @@ The following examples are real prediction grids exported from the experiment no
 
 <img src="docs/assets/hrnet-w18-predictions.png" alt="HRNet-W18 qualitative segmentation predictions" width="100%">
 
-## Methodology
-
-The notebook follows this workflow:
-
-1. Resolve the Oxford-IIIT Pet dataset location and load fixed split CSVs.
-2. Build a custom PyTorch dataset for image-trimap pairs.
-3. Convert trimaps into binary masks.
-4. Apply image normalization and training augmentations.
-5. Train FCN-ResNet18, SegNet-VGG16, and HRNet-W18.
-6. Save the best checkpoints locally during training.
-7. Evaluate each model on the test split.
-8. Generate qualitative prediction grids and comparison plots.
-9. Save the final model comparison table.
-
 ## Repository Structure
 
 ```text
@@ -84,56 +79,12 @@ preprocessing_artifacts/            Fixed train/validation/test split CSVs
 results_artifacts/model_results.csv Saved final comparison metrics
 data/README.md                      Dataset placement instructions
 requirements.txt                    Python dependencies
-.gitignore                          Excludes datasets, checkpoints, caches, and generated large artifacts
 ```
 
-Large local artifacts such as the full Oxford-IIIT Pet dataset and `.pt` model checkpoints are intentionally not committed.
+## Requirements
 
-## Dataset Setup
+If you wish to run this pipeline locally, the following setup is required:
 
-Download the Oxford-IIIT Pet dataset and place it in this layout:
-
-```text
-data/
-  oxford_pet/
-    oxford_pet/
-      images/
-      annotations/
-        trimaps/
-        trainval.txt
-        test.txt
-```
-
-The included split CSVs are expected under `preprocessing_artifacts/`:
-
-```text
-preprocessing_artifacts/
-  train_split.csv
-  val_split.csv
-  test_split.csv
-```
-
-## Setup
-
-Create an environment and install the dependencies:
-
-```bash
-pip install -r requirements.txt
-```
-
-Then open the notebook:
-
-```bash
-jupyter notebook pet_segmentation_models.ipynb
-```
-
-For GPU training, install a PyTorch build that matches your CUDA version from the official PyTorch installation selector.
-
-## Skills Demonstrated
-
-- PyTorch model implementation and training loops
-- Semantic segmentation preprocessing and evaluation
-- Transfer learning with pretrained computer-vision backbones
-- Custom dataset and dataloader design
-- Metric-driven model comparison
-- Experiment artifact management
+- Download the Oxford-IIIT Pet dataset and place it under `data/oxford_pet/`.
+- Install dependencies via `pip install -r requirements.txt`. For GPU training, ensure your PyTorch build matches your CUDA version.
+- Open `pet_segmentation_models.ipynb` to execute the pipeline.
